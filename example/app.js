@@ -1,8 +1,12 @@
+import Howler from 'howler'
+import HowlerTest from './HowerTest'
+
 const init = config => {
-  console.log("I'm alive!")
-
-
+  var howlerTest = new HowlerTest()
+  howlerTest.setup()
 }
+
+
 
 module.exports = {
   init:init
