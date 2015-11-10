@@ -21,7 +21,6 @@ class HowlerTest{
         let burpBtn = document.getElementById('burpBtn')
         let burp = new Howl({
             urls: ['example/assets/burp.mp3'],
-            onend: () => console.log('onBurpEnd')
         })
         burpBtn.onclick = () => burp.play()
     }
@@ -38,11 +37,9 @@ class HowlerTest{
         let loopingBG = new Howl({urls: ['example/assets/ocean_bg.mp3'], loop: true})
         loopBtn.onclick = () => {
             if (this._isLooping) {
-                console.log('time to pause')
                 this._isLooping = false
                 loopingBG.pause()
             } else {
-                console.log('time to play')
                 this._isLooping = true
                 loopingBG.play()
             }
@@ -50,15 +47,10 @@ class HowlerTest{
     }
 
     playNextNumber(){
-        console.log('playNextNumber() - this.soundsAr = ', this.soundsAr)
-        // this.soundsAr.forEach(sound => console.log('02 sound = ', sound))
-
         if(this.soundsAr && this.soundsAr.length > 0){
             let tempSound = this.soundsAr.pop()
             tempSound.onend = () => this.playNextNumber()
             tempSound.play()
-        }else{
-            console.log('soundAr is null or empty')
         }
     }
 
@@ -80,8 +72,6 @@ class HowlerTest{
     playSplash() {
         if (this._splashCount < this.MAX_SPLASHES) {
             this._splashCount++
-
-            console.log('splash!')
             let splashSound = new Howl({urls: ['example/assets/WaterSplash02.mp3']})
             splashSound.play()
 
