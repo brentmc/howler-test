@@ -6,6 +6,7 @@ import Howler from 'howler'
 class HowlerTest{
     constructor(){
         this.soundsAr = []
+        this.MAX_SPLASHES = 10
     }
 
     setup() {
@@ -13,6 +14,7 @@ class HowlerTest{
         this.setupMunch()
         this.setupLoopingBG()
         this.setupCountdown()
+        this.setupSplash()
     }
 
     setupBurp(){
@@ -52,7 +54,7 @@ class HowlerTest{
         // this.soundsAr.forEach(sound => console.log('02 sound = ', sound))
 
         if(this.soundsAr && this.soundsAr.length > 0){
-            let tempSound = this.soundsAr.shift()
+            let tempSound = this.soundsAr.pop()
             tempSound.onend = () => this.playNextNumber()
             tempSound.play()
         }else{
@@ -64,19 +66,38 @@ class HowlerTest{
         let countBtn = document.getElementById('countBtn')
 
         this.soundsAr = []
-        let numbersAr = ['0', '1', '2', '3', 4, 5, 6, 7, 8, 9, 10]
+        let numbersAr = ['burp', '1', '2', '3', 4]
         numbersAr.forEach(num => {
-            console.log('num = ' + num)
             this.soundsAr.push(new Howl(
-                {   urls: ['example/assets/' + num + ".mp3"],
+                {   urls: ['example/assets/' + num + '.mp3'],
                     onend:() => this.playNextNumber()
                 }))
         });
 
-        this.soundsAr.forEach(sound => console.log('01 sound = ', sound))
-
         countBtn.onclick = () => this.playNextNumber()
     }
+
+    playSplash() {
+        if (this._splashCount < this.MAX_SPLASHES) {
+            this._splashCount++
+
+            console.log('splash!')
+            let splashSound = new Howl({urls: ['example/assets/WaterSplash02.mp3']})
+            splashSound.play()
+
+            setTimeout(() => {
+                this.playSplash()
+            }, 500)
+        }
+    }
+
+    setupSplash(){
+        this._splashCount = 0
+        let splashBtn = document.getElementById('splashBtn')
+        splashBtn.onclick = () => this.playSplash()
+    }
+
+
 
 }
 
