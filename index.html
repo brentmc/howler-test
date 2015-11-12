@@ -4,12 +4,27 @@
     <title>Howler Proof of Concept</title>
 </head>
 <body>
-<canvas id="tutorial" width="150" height="150"></canvas>
- <link rel="stylesheet" type="text/css" href="index.css">
-<script src="build/bundle.js"></script>
-<script>window.onload = function () {
-  window.app.init({})
-}
-</script>
+    <canvas id="tutorial"</canvas>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="cordova.js"></script>
+    <script src="build/bundle.js"></script>
+    <script>
+        var isBrowser = true
+        console.log('isBrowser = ', isBrowser)
+
+        var config = {};
+        config.isBrowser = isBrowser;
+        config.fillColour = isBrowser ? 0x70E15E : 0x5894C2;
+
+        if(isBrowser){
+            console.log('browserReady')
+            window.app.init(config)
+        }else {
+            document.addEventListener("deviceready", function() {
+                console.log('onDeviceReady')
+                window.app.init(config)
+            });
+        }
+    </script>
 </body>
 </html>

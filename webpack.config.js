@@ -22,7 +22,7 @@ var config = {
       loader: 'json-loader'
     },
     {
-      test: /\.(png|jpg)$/, 
+      test: /\.(png|jpg|mp3|ogg)$/,
       loader: 'file-loader'
     }]
   },
