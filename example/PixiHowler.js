@@ -74,7 +74,7 @@ class PixiHowler{
         let str = $isBrowser ? "This is browser mode. \nAre you on a computer?" : "This is tablet mode. Are you on a tablet?"
         var text = new PIXI.Text(str)
         text.position.x = window.innerWidth/2 - text.width/2;
-        text.position.y = window.innerHeight/8;
+        text.position.y = 50;
         this.stage.addChild(text)
     }
 
@@ -146,6 +146,35 @@ class PixiHowler{
         }
 
         ////////////////////////////////////////////////////////////////////////////////////
+        let tapClickHowlOGG = this.createBox("tap/Click \nHowlOGG")
+        tapClickHowlOGG.tap = tapClickHowlOGG.click = () => {
+            let howl = new Howl({urls: [successOGG]})
+            console.log('tapClickHowlOGG click - howl = ', howl)
+            howl.play()
+        }
+
+        let tapClickHowlMP3 = this.createBox("tap/Click \nHowlMP3")
+        tapClickHowlMP3.tap = tapClickHowlMP3.click = () => {
+            let howl = new Howl({urls: [successMP3]})
+            console.log('tapClickHowlMP3 click - howl = ', howl)
+            howl.play()
+        }
+
+        let tapClickAudioOGG = this.createBox("tap/Click \nAudioOGG")
+        tapClickAudioOGG.tap = tapClickAudioOGG.click =() => {
+            let audio = new Audio(successOGG);
+            console.log('tapClickAudioOGG click - audio = ', audio)
+            audio.play();
+        }
+
+        let tapClickAudioMP3 = this.createBox("tap/Click \nAudioMP3")
+        tapClickAudioMP3.tap = tapClickAudioMP3.click = () => {
+            let audio = new Audio(successMP3);
+            console.log('tapClickAudioMP3 click - audio = ', audio)
+            audio.play();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////
         let touchStartHowlOGG = this.createBox("touchStart \nHowlOGG")
         touchStartHowlOGG.touchStart = () => {
             let howl = new Howl({urls: [successOGG]})
@@ -205,6 +234,7 @@ class PixiHowler{
     }
 
 
+   // createBox(str, eventListener, sound, soundPlayerStr){
     createBox(str){
         const lineThickness = 2
         const fillColour = 0x3AA6D0
@@ -238,6 +268,7 @@ class PixiHowler{
         this.btnInstanceCount++
         return btnContainer
     }
+
 
     animate() {
         // start the timer for the next animation loop
