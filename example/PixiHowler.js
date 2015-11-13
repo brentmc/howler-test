@@ -8,6 +8,8 @@ import Howler from 'howler'
 import bunnyPNG from './assets/bunny.png'
 import successOGG from './assets/success.ogg'
 import successMP3 from './assets/success.mp3'
+import musicLoopOGG from './assets/musicLoop.ogg'
+import musicLoopMP3 from './assets/musicLoop.mp3'
 
 
 class PixiHowler{
@@ -230,6 +232,36 @@ class PixiHowler{
             let audio = new Audio(successMP3);
             console.log('touchEndAudioMP3 click - audio = ', audio)
             audio.play();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////
+        let musicLoopOGGHowl = new Howl({urls: [musicLoopOGG], loop:true})
+
+        let startLoopOGG = this.createBox("startLoop \nOGG")
+        startLoopOGG.click = startLoopOGG.tap = () => {
+            console.log('startLoopOGG click - musicLoopOGGHowl = ', musicLoopOGGHowl)
+            musicLoopOGGHowl.play()
+        }
+
+        let pauseLoopOGG = this.createBox("pauseLoop \nOGG")
+        pauseLoopOGG.click = pauseLoopOGG.tap = () => {
+            let howl = new Howl({urls: [successMP3]})
+            console.log('pauseLoopOGG click - musicLoopOGGHowl = ', musicLoopOGGHowl)
+            musicLoopOGGHowl.pause()
+        }
+
+
+        let musicLoopMP3Howl = new Howl({urls: [musicLoopMP3], loop:true})
+        let startLoopMP3 = this.createBox("startLoop \nMP3")
+        startLoopMP3.click = startLoopMP3.tap = () => {
+            console.log('startLoopMP3 click - musicLoopMP3Howl = ', musicLoopMP3Howl)
+            musicLoopMP3Howl.play();
+        }
+
+        let pauseLoopMP3 = this.createBox("pauseLoop \nMP3")
+        pauseLoopMP3.click = pauseLoopMP3.tap = () => {
+            console.log('pauseLoopMP3 click - musicLoopMP3Howl = ', musicLoopMP3Howl)
+            musicLoopMP3Howl.pause();
         }
     }
 
