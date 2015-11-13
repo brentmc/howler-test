@@ -32,7 +32,7 @@ class PixiHowler{
 
 
         this.createText(config.isBrowser)
-        this.createGraphics()
+        this.createButtons()
         this.createBunny()
 
         setInterval(() => this.createBunny(), 5000)
@@ -100,7 +100,7 @@ class PixiHowler{
         this.bunnyCountText.y = 50
     }
 
-    createGraphics(){
+    createButtons(){
 
         this.btnsContainer = new PIXI.Container()
         this.btnsContainer.x = 50
@@ -109,28 +109,28 @@ class PixiHowler{
 
         this.btnInstanceCount = 0
 
-        let clickHowlOGG = this.createBox("click \nHowlOGG")
+        let clickHowlOGG = this.createSingleButton("click \nHowlOGG")
         clickHowlOGG.click = () => {
             let howl = new Howl({urls: [successOGG]})
             console.log('clickHowlOGG click - Howl = ', howl)
             howl.play()
         }
 
-        let clickHowlMP3 = this.createBox("click \nHowlMP3")
+        let clickHowlMP3 = this.createSingleButton("click \nHowlMP3")
         clickHowlMP3.click = () => {
             let howl = new Howl({urls: [successMP3]})
             console.log('clickHowlMP3 click - Howl = ', howl)
             howl.play()
         }
 
-        let clickAudioOGG = this.createBox("click \nAudioOGG")
+        let clickAudioOGG = this.createSingleButton("click \nAudioOGG")
         clickAudioOGG.click = () => {
             let audio = new Audio(successOGG);
             console.log('clickAudioOGG click - audio =', audio)
             audio.play();
         }
 
-        let clickAudioMP3 = this.createBox("click \nAudioMP3")
+        let clickAudioMP3 = this.createSingleButton("click \nAudioMP3")
         clickAudioMP3.click = () => {
             let audio = new Audio(successMP3);
             console.log('clickAudioMP3 click - audio = ', audio)
@@ -139,28 +139,28 @@ class PixiHowler{
 
 
         ////////////////////////////////////////////////////////////////////////////////////
-        let tapHowlOGG = this.createBox("tap \nHowlOGG")
+        let tapHowlOGG = this.createSingleButton("tap \nHowlOGG")
         tapHowlOGG.tap = () => {
             let howl = new Howl({urls: [successOGG]})
             console.log('tapHowlOGG click - howl = ', howl)
             howl.play()
         }
 
-        let tapHowlMP3 = this.createBox("tap \nHowlMP3")
+        let tapHowlMP3 = this.createSingleButton("tap \nHowlMP3")
         tapHowlMP3.tap = () => {
             let howl = new Howl({urls: [successMP3]})
             console.log('tapHowlMP3 click - howl = ', howl)
             howl.play()
         }
 
-        let tapAudioOGG = this.createBox("tap \nAudioOGG")
+        let tapAudioOGG = this.createSingleButton("tap \nAudioOGG")
         tapAudioOGG.tap = () => {
             let audio = new Audio(successOGG);
             console.log('tapAudioOGG click - audio = ', audio)
             audio.play();
         }
 
-        let tapAudioMP3 = this.createBox("tap \nAudioMP3")
+        let tapAudioMP3 = this.createSingleButton("tap \nAudioMP3")
         tapAudioMP3.tap = () => {
             let audio = new Audio(successMP3);
             console.log('tapAudioMP3 click - audio = ', audio)
@@ -168,28 +168,28 @@ class PixiHowler{
         }
 
         ////////////////////////////////////////////////////////////////////////////////////
-        let tapClickHowlOGG = this.createBox("tap/Click \nHowlOGG")
+        let tapClickHowlOGG = this.createSingleButton("tap/Click \nHowlOGG")
         tapClickHowlOGG.tap = tapClickHowlOGG.click = () => {
             let howl = new Howl({urls: [successOGG]})
             console.log('tapClickHowlOGG click - howl = ', howl)
             howl.play()
         }
 
-        let tapClickHowlMP3 = this.createBox("tap/Click \nHowlMP3")
+        let tapClickHowlMP3 = this.createSingleButton("tap/Click \nHowlMP3")
         tapClickHowlMP3.tap = tapClickHowlMP3.click = () => {
             let howl = new Howl({urls: [successMP3]})
             console.log('tapClickHowlMP3 click - howl = ', howl)
             howl.play()
         }
 
-        let tapClickAudioOGG = this.createBox("tap/Click \nAudioOGG")
+        let tapClickAudioOGG = this.createSingleButton("tap/Click \nAudioOGG")
         tapClickAudioOGG.tap = tapClickAudioOGG.click =() => {
             let audio = new Audio(successOGG);
             console.log('tapClickAudioOGG click - audio = ', audio)
             audio.play();
         }
 
-        let tapClickAudioMP3 = this.createBox("tap/Click \nAudioMP3")
+        let tapClickAudioMP3 = this.createSingleButton("tap/Click \nAudioMP3")
         tapClickAudioMP3.tap = tapClickAudioMP3.click = () => {
             let audio = new Audio(successMP3);
             console.log('tapClickAudioMP3 click - audio = ', audio)
@@ -197,28 +197,28 @@ class PixiHowler{
         }
 
         ////////////////////////////////////////////////////////////////////////////////////
-        let touchStartHowlOGG = this.createBox("touchStart \nHowlOGG")
+        let touchStartHowlOGG = this.createSingleButton("touchStart \nHowlOGG")
         touchStartHowlOGG.touchStart = () => {
             let howl = new Howl({urls: [successOGG]})
             console.log('touchStartHowlOGG click - howl = ', howl)
             howl.play()
         }
 
-        let touchStartHowlMP3 = this.createBox("touchStart \nHowlMP3")
+        let touchStartHowlMP3 = this.createSingleButton("touchStart \nHowlMP3")
         touchStartHowlMP3.touchStart = () => {
             let howl = new Howl({urls: [successMP3]})
             console.log('touchStartHowlMP3 click - howl = ', howl)
             howl.play()
         }
 
-        let touchStartAudioOGG = this.createBox("touchStart \nAudioOGG")
+        let touchStartAudioOGG = this.createSingleButton("touchStart \nAudioOGG")
         touchStartAudioOGG.touchStart = () => {
             let audio = new Audio(successOGG);
             console.log('touchStartAudioOGG click - audio = ', audio)
             audio.play();
         }
 
-        let touchStartAudioMP3 = this.createBox("touchStart \nAudioMP3")
+        let touchStartAudioMP3 = this.createSingleButton("touchStart \nAudioMP3")
         touchStartAudioMP3.touchStart = () => {
             let audio = new Audio(successMP3);
             console.log('touchStartAudioMP3 click - audio = ', audio)
@@ -226,28 +226,28 @@ class PixiHowler{
         }
 
         ////////////////////////////////////////////////////////////////////////////////////
-        let touchEndHowlOGG = this.createBox("touchEnd \nHowlOGG")
+        let touchEndHowlOGG = this.createSingleButton("touchEnd \nHowlOGG")
         touchEndHowlOGG.touchEnd = () => {
             let howl = new Howl({urls: [successOGG]})
             console.log('touchEndHowlOGG click - howl = ', howl)
             howl.play()
         }
 
-        let touchEndHowlMP3 = this.createBox("touchEnd \nHowlMP3")
+        let touchEndHowlMP3 = this.createSingleButton("touchEnd \nHowlMP3")
         touchEndHowlMP3.touchEnd = () => {
             let howl = new Howl({urls: [successMP3]})
             console.log('touchEndHowlMP3 click - howl = ', howl)
             howl.play()
         }
 
-        let touchEndAudioOGG = this.createBox("touchEnd \nAudioOGG")
+        let touchEndAudioOGG = this.createSingleButton("touchEnd \nAudioOGG")
         touchEndAudioOGG.touchEnd = () => {
             let audio = new Audio(successOGG);
             console.log('touchEndAudioOGG click - audio = ', audio)
             audio.play();
         }
 
-        let touchEndAudioMP3 = this.createBox("touchEnd \nAudioMP3")
+        let touchEndAudioMP3 = this.createSingleButton("touchEnd \nAudioMP3")
         touchEndAudioMP3.touchEnd = () => {
             let audio = new Audio(successMP3);
             console.log('touchEndAudioMP3 click - audio = ', audio)
@@ -257,13 +257,13 @@ class PixiHowler{
         ////////////////////////////////////////////////////////////////////////////////////
         let musicLoopOGGHowl = new Howl({urls: [musicLoopOGG], loop:true})
 
-        let startLoopOGG = this.createBox("startLoop \nOGG")
+        let startLoopOGG = this.createSingleButton("startLoop \nOGG")
         startLoopOGG.click = startLoopOGG.tap = () => {
             console.log('startLoopOGG click - musicLoopOGGHowl = ', musicLoopOGGHowl)
             musicLoopOGGHowl.play()
         }
 
-        let pauseLoopOGG = this.createBox("pauseLoop \nOGG")
+        let pauseLoopOGG = this.createSingleButton("pauseLoop \nOGG")
         pauseLoopOGG.click = pauseLoopOGG.tap = () => {
             let howl = new Howl({urls: [successMP3]})
             console.log('pauseLoopOGG click - musicLoopOGGHowl = ', musicLoopOGGHowl)
@@ -272,13 +272,13 @@ class PixiHowler{
 
 
         let musicLoopMP3Howl = new Howl({urls: [musicLoopMP3], loop:true})
-        let startLoopMP3 = this.createBox("startLoop \nMP3")
+        let startLoopMP3 = this.createSingleButton("startLoop \nMP3")
         startLoopMP3.click = startLoopMP3.tap = () => {
             console.log('startLoopMP3 click - musicLoopMP3Howl = ', musicLoopMP3Howl)
             musicLoopMP3Howl.play();
         }
 
-        let pauseLoopMP3 = this.createBox("pauseLoop \nMP3")
+        let pauseLoopMP3 = this.createSingleButton("pauseLoop \nMP3")
         pauseLoopMP3.click = pauseLoopMP3.tap = () => {
             console.log('pauseLoopMP3 click - musicLoopMP3Howl = ', musicLoopMP3Howl)
             musicLoopMP3Howl.pause();
@@ -286,8 +286,7 @@ class PixiHowler{
     }
 
 
-   // createBox(str, eventListener, sound, soundPlayerStr){
-    createBox(str){
+    createSingleButton(str){
         const lineThickness = 2
         const fillColour = 0x3AA6D0
         const lineColour = 0x000000
@@ -317,8 +316,46 @@ class PixiHowler{
         labelText.position.y = (btnBG.height - labelText.height)/2
         btnContainer.addChild(labelText)
 
+        btnContainer
+            // set the mousedown and touchstart callback...
+            .on('mousedown', this.onButtonDown)
+            .on('touchstart', this.onButtonDown)
+
+            // set the mouseup and touchend callback...
+            .on('mouseup', this.onButtonUp)
+            .on('touchend', this.onButtonUp)
+            .on('mouseupoutside', this.onButtonUp)
+            .on('touchendoutside', this.onButtonUp)
+
+            // set the mouseover callback...
+            .on('mouseover', this.onButtonOver)
+
+            // set the mouseout callback...
+            .on('mouseout', this.onButtonOut)
+
+
         this.btnInstanceCount++
         return btnContainer
+    }
+
+
+
+
+
+    onButtonOver(){
+        this.alpha = 0.8
+    }
+
+    onButtonDown(){
+        this.alpha = 0.3
+    }
+
+    onButtonUp(){
+        this.alpha = 1
+    }
+
+    onButtonOut(){
+        this.alpha = 1
     }
 
 
