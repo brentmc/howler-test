@@ -18,8 +18,6 @@ class PixiHowler{
     }
 
     setup(config) {
-        console.log('setup')
-
         // You can use either `new PIXI.WebGLRenderer`, `new PIXI.CanvasRenderer`, or `PIXI.autoDetectRenderer`
         // which will try to choose the best renderer for the environment you are in.
         this.renderer = new PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {view:document.getElementById("tutorial")});
@@ -36,6 +34,8 @@ class PixiHowler{
         this.createText(config.isBrowser)
         this.createGraphics()
 
+        // kick off the animation loop (defined below)
+        this.animate();
     }
 
     createBunny(){
@@ -62,13 +62,6 @@ class PixiHowler{
                 this.bunny.anchor.set(0.5)
                 this.bunny.scale.set(3)
 
-                //We need .tap for tablet and .click for browser
-                this.bunny.tap = this.bunny.click = () => {
-                    var audio = new Audio(successOGG);
-                    console.log('clicked bunny - audio = ', audio)
-                    audio.play();
-                }
-
                 this.bunny.on('mousedown', this.onDragStart)
                     .on('touchstart', this.onDragStart)
                     // events for drag end
@@ -81,8 +74,7 @@ class PixiHowler{
                     .on('touchmove', this.onDragMove);
 
 
-                // kick off the animation loop (defined below)
-                this.animate();
+
             }
         );
     }
@@ -321,15 +313,16 @@ class PixiHowler{
         // start the timer for the next animation loop
         requestAnimationFrame(() => this.animate());
 
-        // each frame we spin the bunny around a bit
-        this.bunny.rotation += 0.1;
+        if(this.bunny) {
+            // each frame we spin the bunny around a bit
+            this.bunny.rotation += 0.1;
+        }
 
         // this is the main render call that makes pixi draw your container and its children.
         this.renderer.render(this.stage);
     }
 
     onDragStart(event){
-        console.log('onDragStart this = ', this)
         // store a reference to the data
         // the reason for this is because of multitouch
         // we want to track the movement of this particular touch
@@ -339,7 +332,6 @@ class PixiHowler{
     }
 
     onDragEnd(){
-        console.log('onDragEnd this = ', this)
         this.alpha = 1;
 
         this.dragging = false;
@@ -349,7 +341,6 @@ class PixiHowler{
     }
 
     onDragMove(){
-        console.log('onDragMove this = ', this)
         if (this.dragging){
             var newPosition = this.data.getLocalPosition(this.parent);
             this.position.x = newPosition.x;
