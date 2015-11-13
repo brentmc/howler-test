@@ -58,13 +58,28 @@ class PixiHowler{
                 this.stage.addChild(this.bunny);
 
                 this.bunny.interactive = true
+                this.bunny.buttonMode = true
+                this.bunny.anchor.set(0.5)
+                this.bunny.scale.set(3)
 
                 //We need .tap for tablet and .click for browser
-                this.bunny.tap = () => {
+                this.bunny.tap = this.bunny.click = () => {
                     var audio = new Audio(successOGG);
                     console.log('clicked bunny - audio = ', audio)
                     audio.play();
                 }
+
+                this.bunny.on('mousedown', this.onDragStart)
+                    .on('touchstart', this.onDragStart)
+                    // events for drag end
+                    .on('mouseup', this.onDragEnd)
+                    .on('mouseupoutside', this.onDragEnd)
+                    .on('touchend', this.onDragEnd)
+                    .on('touchendoutside', this.onDragEnd)
+                    // events for drag move
+                    .on('mousemove', this.onDragMove)
+                    .on('touchmove', this.onDragMove);
+
 
                 // kick off the animation loop (defined below)
                 this.animate();
@@ -307,10 +322,39 @@ class PixiHowler{
         requestAnimationFrame(() => this.animate());
 
         // each frame we spin the bunny around a bit
-     //   this.bunny.rotation += 0.1;
+        this.bunny.rotation += 0.1;
 
         // this is the main render call that makes pixi draw your container and its children.
         this.renderer.render(this.stage);
+    }
+
+    onDragStart(event){
+        console.log('onDragStart this = ', this)
+        // store a reference to the data
+        // the reason for this is because of multitouch
+        // we want to track the movement of this particular touch
+        this.data = event.data;
+        this.alpha = 0.5;
+        this.dragging = true;
+    }
+
+    onDragEnd(){
+        console.log('onDragEnd this = ', this)
+        this.alpha = 1;
+
+        this.dragging = false;
+
+        // set the interaction data to null
+        this.data = null;
+    }
+
+    onDragMove(){
+        console.log('onDragMove this = ', this)
+        if (this.dragging){
+            var newPosition = this.data.getLocalPosition(this.parent);
+            this.position.x = newPosition.x;
+            this.position.y = newPosition.y;
+        }
     }
 }
 
