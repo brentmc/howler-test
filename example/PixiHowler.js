@@ -34,30 +34,37 @@ class PixiHowler{
         this.createText(config.isBrowser)
         this.createGraphics()
 
+        setInterval(() => this.createBunny(), 5000)
+
         // kick off the animation loop (defined below)
         this.animate();
     }
 
     createBunny(){
+        if(!this.bunniesAr){
+            this.bunniesAr = []
+        }
+
         var bunnyTexture = new PIXI.Texture.fromImage(bunnyPNG)
-        this.bunny = new PIXI.Sprite(bunnyTexture)
+        let tempBunny = new PIXI.Sprite(bunnyTexture)
 
         // Setup the position and scale of the bunny
-        this.bunny.position.x = 50
-        this.bunny.position.y = 50
+        tempBunny.position.x = 50
+        tempBunny.position.y = 50
 
-        this.bunny.scale.x = 2;
-        this.bunny.scale.y = 2;
+        tempBunny.scale.x = 2;
+        tempBunny.scale.y = 2;
+
 
         // Add the bunny to the scene we are building.
-        this.stage.addChild(this.bunny);
+        this.stage.addChild(tempBunny);
 
-        this.bunny.interactive = true
-        this.bunny.buttonMode = true
-        this.bunny.anchor.set(0.5)
-        this.bunny.scale.set(3)
+        tempBunny.interactive = true
+        tempBunny.buttonMode = true
+        tempBunny.anchor.set(0.5)
+        tempBunny.scale.set(3)
 
-        this.bunny.on('mousedown', this.onDragStart)
+        tempBunny.on('mousedown', this.onDragStart)
             .on('touchstart', this.onDragStart)
             // events for drag end
             .on('mouseup', this.onDragEnd)
@@ -68,6 +75,7 @@ class PixiHowler{
             .on('mousemove', this.onDragMove)
             .on('touchmove', this.onDragMove);
 
+        this.bunniesAr.push(tempBunny)
     }
 
     createText($isBrowser){
@@ -304,10 +312,14 @@ class PixiHowler{
         // start the timer for the next animation loop
         requestAnimationFrame(() => this.animate());
 
-        if(this.bunny) {
-            // each frame we spin the bunny around a bit
-            this.bunny.rotation += 0.1;
+        if(this.bunniesAr) {
+            this.bunniesAr.forEach(bunny => bunny.rotation += 0.1)
         }
+
+      //  if(this.bunny) {
+        //    // each frame we spin the bunny around a bit
+          //  this.bunny.rotation += 0.1;
+       // }
 
         // this is the main render call that makes pixi draw your container and its children.
         this.renderer.render(this.stage);
