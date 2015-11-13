@@ -39,44 +39,35 @@ class PixiHowler{
     }
 
     createBunny(){
+        var bunnyTexture = new PIXI.Texture.fromImage(bunnyPNG)
+        this.bunny = new PIXI.Sprite(bunnyTexture)
 
-        // load the texture we need
-        PIXI.loader.add('bunny', bunnyPNG).load(
+        // Setup the position and scale of the bunny
+        this.bunny.position.x = 50
+        this.bunny.position.y = 50
 
-            (loader, resources) => {
-                // This creates a texture from a 'bunny.png' image.
-                this.bunny = new PIXI.Sprite(resources.bunny.texture);
+        this.bunny.scale.x = 2;
+        this.bunny.scale.y = 2;
 
-                // Setup the position and scale of the bunny
-                this.bunny.position.x = 50//window.innerWidth/2;
-                this.bunny.position.y = 50//window.innerHeight/2;
+        // Add the bunny to the scene we are building.
+        this.stage.addChild(this.bunny);
 
-                this.bunny.scale.x = 2;
-                this.bunny.scale.y = 2;
+        this.bunny.interactive = true
+        this.bunny.buttonMode = true
+        this.bunny.anchor.set(0.5)
+        this.bunny.scale.set(3)
 
-                // Add the bunny to the scene we are building.
-                this.stage.addChild(this.bunny);
+        this.bunny.on('mousedown', this.onDragStart)
+            .on('touchstart', this.onDragStart)
+            // events for drag end
+            .on('mouseup', this.onDragEnd)
+            .on('mouseupoutside', this.onDragEnd)
+            .on('touchend', this.onDragEnd)
+            .on('touchendoutside', this.onDragEnd)
+            // events for drag move
+            .on('mousemove', this.onDragMove)
+            .on('touchmove', this.onDragMove);
 
-                this.bunny.interactive = true
-                this.bunny.buttonMode = true
-                this.bunny.anchor.set(0.5)
-                this.bunny.scale.set(3)
-
-                this.bunny.on('mousedown', this.onDragStart)
-                    .on('touchstart', this.onDragStart)
-                    // events for drag end
-                    .on('mouseup', this.onDragEnd)
-                    .on('mouseupoutside', this.onDragEnd)
-                    .on('touchend', this.onDragEnd)
-                    .on('touchendoutside', this.onDragEnd)
-                    // events for drag move
-                    .on('mousemove', this.onDragMove)
-                    .on('touchmove', this.onDragMove);
-
-
-
-            }
-        );
     }
 
     createText($isBrowser){
