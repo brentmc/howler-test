@@ -7,6 +7,7 @@ import Howler from 'howler'
 //Make sure your assets are imported to ensure that webpack packages hashed versions up into /build
 import bunnypng from './_assets/bunny.png'
 import burpOgg from './assets/burp.ogg'
+import burpMp3 from './assets/burp.mp3'
 
 
 class PixiHowler{
@@ -19,7 +20,7 @@ class PixiHowler{
 
         // You can use either `new PIXI.WebGLRenderer`, `new PIXI.CanvasRenderer`, or `PIXI.autoDetectRenderer`
         // which will try to choose the best renderer for the environment you are in.
-        this.renderer = new PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight);
+        this.renderer = new PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {view:document.getElementById("tutorial")});
         this.renderer.backgroundColor = config.fillColour
 
         // The renderer will create a canvas element for you that you can then insert into the DOM.
@@ -30,7 +31,7 @@ class PixiHowler{
 
 
         this.createBunny()
-        this.createText()
+        this.createText(config.isBrowser)
         this.createGraphics()
 
     }
@@ -46,8 +47,8 @@ class PixiHowler{
                 this.bunny = new PIXI.Sprite(resources.bunny.texture);
 
                 // Setup the position and scale of the bunny
-                this.bunny.position.x = window.innerWidth/2;
-                this.bunny.position.y = window.innerHeight/2;
+                this.bunny.position.x = 50//window.innerWidth/2;
+                this.bunny.position.y = 50//window.innerHeight/2;
 
                 this.bunny.scale.x = 2;
                 this.bunny.scale.y = 2;
@@ -59,22 +60,10 @@ class PixiHowler{
 
                 //We need .tap for tablet and .click for browser
                 this.bunny.tap = () => {
-
-                    console.log('clicked')
-
+                    console.log('clicked bunny')
                     var audio = new Audio(burpOgg);
                     audio.play();
-
                     console.log('audio', audio)
-
-                    //TODO it is possible that Howl would have worked the entire time if we had correctly built in the .ogg file and used tap instead of click
-                   // console.log('bunny click')
-                //    let burp = new Howl({
-                //        urls: [burpMp3],
-                //    })
-                 //   burp.play()
-                    //TODO check this
-
                 }
 
                 // kick off the animation loop (defined below)
@@ -83,59 +72,100 @@ class PixiHowler{
         );
     }
 
-    createText(){
-        var text = new PIXI.Text("Hola Sr McIvor!")
-        text.position.x = window.innerWidth/2;
-        text.position.y = window.innerHeight/2 - 100;
+    createText($isBrowser){
+        let str = $isBrowser ? "This is browser mode. \nAre you on a computer?" : "This is tablet mode. Are you on a tablet?"
+        var text = new PIXI.Text(str)
+        text.position.x = window.innerWidth/2 - text.width/2;
+        text.position.y = window.innerHeight/8;
         this.stage.addChild(text)
     }
 
     createGraphics(){
-        var graphics = new PIXI.Graphics();
 
-        // set a fill and line style
-        graphics.beginFill(0xFF3300);
-        graphics.lineStyle(4, 0xffd900, 1);
-
-        // draw a shape
-        graphics.moveTo(50,50);
-        graphics.lineTo(250, 50);
-        graphics.lineTo(100, 100);
-        graphics.lineTo(50, 50);
-        graphics.endFill();
-
-        // set a fill and a line style again and draw a rectangle
-        graphics.lineStyle(2, 0x0000FF, 1);
-        graphics.beginFill(0xFF700B, 1);
-        graphics.drawRect(50, 250, 120, 120);
-
-        // draw a rounded rectangle
-        graphics.lineStyle(2, 0xFF00FF, 1);
-        graphics.beginFill(0xFF00BB, 0.25);
-        graphics.drawRoundedRect(150, 450, 300, 100, 15);
-        graphics.endFill();
-
-        // draw a circle, set the lineStyle to zero so the circle doesn't have an outline
-        graphics.lineStyle(0);
-        graphics.beginFill(0xFFFF0B, 0.5);
-        graphics.drawCircle(470, 90,60);
-        graphics.endFill();
-
-        graphics.interactive = true
-
-        graphics.click = () => {
-            console.log('graphics click')
-            let burp = new Howl({
-                urls: [burpOgg],
-            })
+        let clickHowlOGG = this.createBox(0, 250, "clickHowlOGG")
+        clickHowlOGG.click = () => {
+            let burp = new Howl({urls: [burpOgg]})
+            console.log('clickHowlOGG click - Howl = ', burp)
             burp.play()
+        }
 
+        let clickHowlMP3 = this.createBox(210, 250, "clickHowlMP3")
+        clickHowlMP3.click = () => {
+            let burp = new Howl({urls: [burpMp3]})
+            console.log('clickHowlMP3 click - Howl = ', burp)
+            burp.play()
+        }
+
+        let clickAudioOGG = this.createBox(420, 250, "clickAudioOGG")
+        clickAudioOGG.click = () => {
+            let audio = new Audio(burpOgg);
+            console.log('clickAudioOGG click - audio =', audio)
+            audio.play();
+        }
+
+        let clickAudioMP3 = this.createBox(630, 250, "clickAudioMP3")
+        clickAudioMP3.click = () => {
+            let audio = new Audio(burpMp3);
+            console.log('clickAudioMP3 click - audio = ', audio)
+            audio.play();
         }
 
 
-        this.stage.addChild(graphics);
+        ////////////////////////////////////////////////////////////////////////////////////
+        let tapHowlOGG = this.createBox(0, 360, "tapHowlOGG")
+        tapHowlOGG.tap = () => {
+            let burp = new Howl({urls: [burpOgg]})
+            console.log('tapHowlOGG click - burp = ', burp)
+            burp.play()
+        }
+
+        let tapHowlMP3 = this.createBox(210, 360, "tapHowlMP3")
+        tapHowlMP3.tap = () => {
+            let burp = new Howl({urls: [burpMp3]})
+            console.log('tapHowlMP3 click - burp = ', burp)
+            burp.play()
+        }
+
+        let tapAudioOGG = this.createBox(420, 360, "tapAudioOGG")
+        tapAudioOGG.tap = () => {
+            let audio = new Audio(burpOgg);
+            console.log('tapAudioOGG click - audio = ', audio)
+            audio.play();
+        }
+
+        let tapAudioMP3 = this.createBox(630, 360, "tapAudioMP3")
+        tapAudioMP3.tap = () => {
+            let audio = new Audio(burpMp3);
+            console.log('tapAudioMP3 click - audio = ', audio)
+            audio.play();
+        }
+
+
     }
 
+
+    createBox(xPos, yPos, str){
+        const lineThickness = 2
+        const fillColour = 0x3AA6D0
+        const lineColour = 0x000000
+        const rectH = 100
+        const rectW = 2 * rectH
+
+        var graphics = new PIXI.Graphics()
+        graphics.lineStyle(lineThickness, lineColour, 1)
+        graphics.beginFill(fillColour, 1)
+        graphics.drawRect(xPos, yPos, rectW, rectH)
+        this.stage.addChild(graphics)
+        graphics.interactive = true
+
+        var labelText = new PIXI.Text(str)
+        labelText.position.x = (graphics.width - labelText.width)/2 + xPos
+        labelText.position.y = (graphics.height - labelText.height)/2 + yPos
+        this.stage.addChild(labelText)
+
+
+        return graphics
+    }
 
     animate() {
         // start the timer for the next animation loop

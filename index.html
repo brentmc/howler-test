@@ -2,24 +2,29 @@
 <html>
 <head>
     <title>Howler Proof of Concept</title>
+    <style type="text/css">
+        body{ padding: 0; margin: 0; overflow:hidden; background-color: #7E61C9}
+        canvas{ border: 4px solid black; width:100%; height:100%}
+    </style>
 </head>
 <body>
-    <canvas id="tutorial"</canvas>
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <canvas id="tutorial"></canvas>
     <script src="cordova.js"></script>
     <script src="build/bundle.js"></script>
     <script>
-        var isBrowser = true
+        var isBrowser = false
         console.log('isBrowser = ', isBrowser)
+
 
         var config = {};
         config.isBrowser = isBrowser;
         config.fillColour = isBrowser ? 0x70E15E : 0x5894C2;
 
         if(isBrowser){
-            console.log('browserReady')
+            console.log('This is browser mode. Are you on a computer?')
             window.app.init(config)
         }else {
+            console.log('This is tablet mode. Are you on a tablet? - Waiting for deviceReady')
             document.addEventListener("deviceready", function() {
                 console.log('onDeviceReady')
                 window.app.init(config)
