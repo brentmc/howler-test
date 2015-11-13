@@ -30,9 +30,10 @@ class PixiHowler{
         this.stage = new PIXI.Container();
 
 
-        this.createBunny()
+
         this.createText(config.isBrowser)
         this.createGraphics()
+        this.createBunny()
 
         setInterval(() => this.createBunny(), 5000)
 
@@ -49,8 +50,8 @@ class PixiHowler{
         let tempBunny = new PIXI.Sprite(bunnyTexture)
 
         // Setup the position and scale of the bunny
-        tempBunny.position.x = 50
-        tempBunny.position.y = 50
+        tempBunny.position.x = (window.innerWidth - tempBunny.width)/2
+        tempBunny.position.y = (window.innerHeight - tempBunny.height)/2
 
         tempBunny.scale.x = 2;
         tempBunny.scale.y = 2;
@@ -76,6 +77,7 @@ class PixiHowler{
             .on('touchmove', this.onDragMove);
 
         this.bunniesAr.push(tempBunny)
+        this.updateBunnyCounter()
     }
 
     createText($isBrowser){
@@ -84,6 +86,18 @@ class PixiHowler{
         text.position.x = window.innerWidth/2 - text.width/2;
         text.position.y = 50;
         this.stage.addChild(text)
+    }
+
+    updateBunnyCounter(){
+        if(!this.bunnyCountText){
+            this.bunnyCountText = new PIXI.Text('No bunnies on stage')
+            this.stage.addChild(this.bunnyCountText)
+        }
+        let numBunnies = this.bunniesAr ? this.bunniesAr.length : 0
+
+        this.bunnyCountText.text = numBunnies + ' bunnies on stage'
+        this.bunnyCountText.x = window.innerWidth - this.bunnyCountText.width - 20
+        this.bunnyCountText.y = 50
     }
 
     createGraphics(){
