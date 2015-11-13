@@ -5,9 +5,9 @@ import pixi from 'pixi.js'
 import Howler from 'howler'
 
 //Make sure your assets are imported to ensure that webpack packages hashed versions up into /build
-import bunnypng from './_assets/bunny.png'
-import burpOgg from './assets/burp.ogg'
-import burpMp3 from './assets/burp.mp3'
+import bunnyPNG from './assets/bunny.png'
+import successOGG from './assets/success.ogg'
+import successMP3 from './assets/success.mp3'
 
 
 class PixiHowler{
@@ -40,7 +40,7 @@ class PixiHowler{
       //  const bunnypng = require('./_assets/bunny.png')
 
         // load the texture we need
-        PIXI.loader.add('bunny', bunnypng).load(
+        PIXI.loader.add('bunny', bunnyPNG).load(
 
             (loader, resources) => {
                 // This creates a texture from a 'bunny.png' image.
@@ -61,7 +61,7 @@ class PixiHowler{
                 //We need .tap for tablet and .click for browser
                 this.bunny.tap = () => {
                     console.log('clicked bunny')
-                    var audio = new Audio(burpOgg);
+                    var audio = new Audio(successOGG);
                     audio.play();
                     console.log('audio', audio)
                 }
@@ -82,61 +82,119 @@ class PixiHowler{
 
     createGraphics(){
 
-        let clickHowlOGG = this.createBox(0, 250, "clickHowlOGG")
+        let clickHowlOGG = this.createBox(0, 250, "click \nHowlOGG")
         clickHowlOGG.click = () => {
-            let burp = new Howl({urls: [burpOgg]})
-            console.log('clickHowlOGG click - Howl = ', burp)
-            burp.play()
+            let howl = new Howl({urls: [successOGG]})
+            console.log('clickHowlOGG click - Howl = ', howl)
+            howl.play()
         }
 
-        let clickHowlMP3 = this.createBox(210, 250, "clickHowlMP3")
+        let clickHowlMP3 = this.createBox(210, 250, "click \nHowlMP3")
         clickHowlMP3.click = () => {
-            let burp = new Howl({urls: [burpMp3]})
-            console.log('clickHowlMP3 click - Howl = ', burp)
-            burp.play()
+            let howl = new Howl({urls: [successMP3]})
+            console.log('clickHowlMP3 click - Howl = ', howl)
+            howl.play()
         }
 
-        let clickAudioOGG = this.createBox(420, 250, "clickAudioOGG")
+        let clickAudioOGG = this.createBox(420, 250, "click \nAudioOGG")
         clickAudioOGG.click = () => {
-            let audio = new Audio(burpOgg);
+            let audio = new Audio(successOGG);
             console.log('clickAudioOGG click - audio =', audio)
             audio.play();
         }
 
-        let clickAudioMP3 = this.createBox(630, 250, "clickAudioMP3")
+        let clickAudioMP3 = this.createBox(630, 250, "click \nAudioMP3")
         clickAudioMP3.click = () => {
-            let audio = new Audio(burpMp3);
+            let audio = new Audio(successMP3);
             console.log('clickAudioMP3 click - audio = ', audio)
             audio.play();
         }
 
 
         ////////////////////////////////////////////////////////////////////////////////////
-        let tapHowlOGG = this.createBox(0, 360, "tapHowlOGG")
+        let tapHowlOGG = this.createBox(0, 360, "tap \nHowlOGG")
         tapHowlOGG.tap = () => {
-            let burp = new Howl({urls: [burpOgg]})
-            console.log('tapHowlOGG click - burp = ', burp)
-            burp.play()
+            let howl = new Howl({urls: [successOGG]})
+            console.log('tapHowlOGG click - howl = ', howl)
+            howl.play()
         }
 
-        let tapHowlMP3 = this.createBox(210, 360, "tapHowlMP3")
+        let tapHowlMP3 = this.createBox(210, 360, "tap \nHowlMP3")
         tapHowlMP3.tap = () => {
-            let burp = new Howl({urls: [burpMp3]})
-            console.log('tapHowlMP3 click - burp = ', burp)
-            burp.play()
+            let howl = new Howl({urls: [successMP3]})
+            console.log('tapHowlMP3 click - howl = ', howl)
+            howl.play()
         }
 
-        let tapAudioOGG = this.createBox(420, 360, "tapAudioOGG")
+        let tapAudioOGG = this.createBox(420, 360, "tap \nAudioOGG")
         tapAudioOGG.tap = () => {
-            let audio = new Audio(burpOgg);
+            let audio = new Audio(successOGG);
             console.log('tapAudioOGG click - audio = ', audio)
             audio.play();
         }
 
-        let tapAudioMP3 = this.createBox(630, 360, "tapAudioMP3")
+        let tapAudioMP3 = this.createBox(630, 360, "tap \nAudioMP3")
         tapAudioMP3.tap = () => {
-            let audio = new Audio(burpMp3);
+            let audio = new Audio(successMP3);
             console.log('tapAudioMP3 click - audio = ', audio)
+            audio.play();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////
+        let touchStartHowlOGG = this.createBox(0, 470, "touchStart \nHowlOGG")
+        touchStartHowlOGG.touchStart = () => {
+            let howl = new Howl({urls: [successOGG]})
+            console.log('touchStartHowlOGG click - howl = ', howl)
+            howl.play()
+        }
+
+        let touchStartHowlMP3 = this.createBox(210, 470, "touchStart \nHowlMP3")
+        touchStartHowlMP3.touchStart = () => {
+            let howl = new Howl({urls: [successMP3]})
+            console.log('touchStartHowlMP3 click - howl = ', howl)
+            howl.play()
+        }
+
+        let touchStartAudioOGG = this.createBox(420, 470, "touchStart \nAudioOGG")
+        touchStartAudioOGG.touchStart = () => {
+            let audio = new Audio(successOGG);
+            console.log('touchStartAudioOGG click - audio = ', audio)
+            audio.play();
+        }
+
+        let touchStartAudioMP3 = this.createBox(630, 470, "touchStart \nAudioMP3")
+        touchStartAudioMP3.touchStart = () => {
+            let audio = new Audio(successMP3);
+            console.log('touchStartAudioMP3 click - audio = ', audio)
+            audio.play();
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////
+        let touchEndHowlOGG = this.createBox(0, 580, "touchEnd \nHowlOGG")
+        touchEndHowlOGG.touchEnd = () => {
+            let howl = new Howl({urls: [successOGG]})
+            console.log('touchEndHowlOGG click - howl = ', howl)
+            howl.play()
+        }
+
+        let touchEndHowlMP3 = this.createBox(210, 580, "touchEnd \nHowlMP3")
+        touchEndHowlMP3.touchEnd = () => {
+            let howl = new Howl({urls: [successMP3]})
+            console.log('touchEndHowlMP3 click - howl = ', howl)
+            howl.play()
+        }
+
+        let touchEndAudioOGG = this.createBox(420, 580, "touchEnd \nAudioOGG")
+        touchEndAudioOGG.touchEnd = () => {
+            let audio = new Audio(successOGG);
+            console.log('touchEndAudioOGG click - audio = ', audio)
+            audio.play();
+        }
+
+        let touchEndAudioMP3 = this.createBox(630, 580, "touchEnd \nAudioMP3")
+        touchEndAudioMP3.touchEnd = () => {
+            let audio = new Audio(successMP3);
+            console.log('touchEndAudioMP3 click - audio = ', audio)
             audio.play();
         }
 
